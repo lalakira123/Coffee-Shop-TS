@@ -10,11 +10,11 @@ export function Header() {
 
       <nav>
         <LocationNavOption href="#">
-          <MapPin size={'18px'}/>
+          <MapPin size={'18px'} />
           São Paulo, SP
         </LocationNavOption>
         <CartNavOption href="#">
-          <ShoppingCart size={'18px'}/>
+          <ShoppingCart size={'18px'} />
         </CartNavOption>
       </nav>
     </HeaderContainer>
