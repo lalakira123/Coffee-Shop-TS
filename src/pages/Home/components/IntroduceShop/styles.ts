@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const IntroduceShopContainer = styled.section`
+  padding: 5.75rem 0;
   display: grid;
   grid-template-columns: 1fr 29.75rem;
   gap: 3.5rem;
