@@ -48,28 +48,28 @@ export const PaymentFormContainer = styled(BaseFormContainer)`
 `
 
 export const FieldsContainer = styled.div`
-	.customerInput {
-		display: flex;
-		justify-content: space-between;
-		flex: 1;
-	}
+  .customerInput {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+  }
 
-	.optionalInput { 
-		display: flex;
-		flex: 1;
-		position: relative;
-		max-width: 20.5rem;
-	}
+  .optionalInput {
+    display: flex;
+    flex: 1;
+    position: relative;
+    max-width: 20.5rem;
+  }
 
-	.optionalInput span {
-		position: absolute;
-		top: 30px;
-		right: 20px;
+  .optionalInput span {
+    position: absolute;
+    top: 30px;
+    right: 20px;
 
-		font-style: italic;
-		font-size: 0.875rem;
-		color: ${(props) => props.theme['base-label']};
-	}
+    font-style: italic;
+    font-size: 0.875rem;
+    color: ${(props) => props.theme['base-label']};
+  }
 `
 
 export const BaseInputText = styled.input`
@@ -79,7 +79,7 @@ export const BaseInputText = styled.input`
   color: ${(props) => props.theme['base-text']};
   padding: 0.875rem;
   max-width: ${(props) => props.width};
-	width: 100%;
+  width: 100%;
   margin-top: 1rem;
 
   &::placeholder {
@@ -91,7 +91,7 @@ export const OptionsPaymentContainer = styled.div`
   display: flex;
   justify-content: space-between;
 
-  input { 
+  input {
     height: 0;
     width: 0;
     background-color: none;
@@ -135,7 +135,7 @@ export const CardCoffee = styled.div`
   padding-bottom: 2rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid ${(props) => props.theme['base-button']};
-  
+
   img {
     max-width: 4rem;
   }
@@ -158,7 +158,7 @@ export const ValueContainer = styled.div`
 
   strong {
     font-size: 1.25rem;
-    color: ${(props) => props.theme['base-subtitle']}
+    color: ${(props) => props.theme['base-subtitle']};
   }
 `
 

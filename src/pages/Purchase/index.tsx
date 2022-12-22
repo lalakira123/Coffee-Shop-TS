@@ -1,4 +1,11 @@
-import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from 'phosphor-react'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+  Trash,
+} from 'phosphor-react'
 import {
   AddressFormContainer,
   PurchaseFormContainer,
@@ -12,7 +19,7 @@ import {
   ValueContainer,
 } from './styles'
 
-import coffeeTradicional  from '../../assets/coffee/coffeeTradicional.svg'
+import coffeeTradicional from '../../assets/coffee/coffeeTradicional.svg'
 
 export function Purchase() {
   return (
@@ -87,7 +94,7 @@ export function Purchase() {
 
             <div className="info">
               <h4>Expresso Tradicional</h4>
-              
+
               <div className="buttons">
                 <input type="number" />
                 <button>
@@ -96,7 +103,7 @@ export function Purchase() {
                 </button>
               </div>
             </div>
-              
+
             <p>R$ 9,90</p>
           </CardCoffee>
 
@@ -105,7 +112,7 @@ export function Purchase() {
 
             <div className="info">
               <h4>Expresso Tradicional</h4>
-              
+
               <div className="buttons">
                 <input type="number" />
                 <button>
