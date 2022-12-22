@@ -1,11 +1,18 @@
-import { CurrencyDollar, MapPinLine } from 'phosphor-react'
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from 'phosphor-react'
 import {
   AddressFormContainer,
   PurchaseFormContainer,
   PaymentFormContainer,
   BaseInputText,
   FieldsContainer,
+  OptionsPaymentContainer,
+  SelectedCoffeeContainer,
+  CardCoffee,
+  ConfirmButton,
+  ValueContainer,
 } from './styles'
+
+import coffeeTradicional  from '../../assets/coffee/coffeeTradicional.svg'
 
 export function Purchase() {
   return (
@@ -51,15 +58,84 @@ export function Purchase() {
             </div>
           </div>
 
-          <div>
+          <OptionsPaymentContainer>
             <input type="radio" id="credit" name="typePayment" value="credit" />
-            <label htmlFor="credit">CARTÃO DE CRÉDITO</label>
+            <label htmlFor="credit">
+              <CreditCard />
+              CARTÃO DE CRÉDITO
+            </label>
             <input type="radio" id="debit" name="typePayment" value="debit" />
-            <label htmlFor="debit">CARTÃO DE DÉBITO</label>
+            <label htmlFor="debit">
+              <Bank />
+              CARTÃO DE DÉBITO
+            </label>
             <input type="radio" id="cash" name="typePayment" value="cash" />
-            <label htmlFor="cash">DINHEIRO</label>
-          </div>
+            <label htmlFor="cash">
+              <Money />
+              DINHEIRO
+            </label>
+          </OptionsPaymentContainer>
         </PaymentFormContainer>
+      </section>
+
+      <section>
+        <h2>Cafés selecionados</h2>
+
+        <SelectedCoffeeContainer>
+          <CardCoffee>
+            <img src={coffeeTradicional} alt="" />
+
+            <div className="info">
+              <h4>Expresso Tradicional</h4>
+              
+              <div className="buttons">
+                <input type="number" />
+                <button>
+                  <Trash />
+                  Remover
+                </button>
+              </div>
+            </div>
+              
+            <p>R$ 9,90</p>
+          </CardCoffee>
+
+          <CardCoffee>
+            <img src={coffeeTradicional} alt="" />
+
+            <div className="info">
+              <h4>Expresso Tradicional</h4>
+              
+              <div className="buttons">
+                <input type="number" />
+                <button>
+                  <Trash />
+                  Remover
+                </button>
+              </div>
+            </div>
+
+            <p>R$ 9,90</p>
+          </CardCoffee>
+
+          <ValueContainer>
+            <p>Total de itens</p>
+            <p>R$ 29,70</p>
+          </ValueContainer>
+          <ValueContainer>
+            <p>Entrega</p>
+            <p>R$ 3,50</p>
+          </ValueContainer>
+          <ValueContainer>
+            <p>
+              <strong>Total</strong>
+            </p>
+            <p>
+              <strong>R$ 33,20</strong>
+            </p>
+          </ValueContainer>
+          <ConfirmButton>CONFIRMAR PEDIDO</ConfirmButton>
+        </SelectedCoffeeContainer>
       </section>
     </PurchaseFormContainer>
   )

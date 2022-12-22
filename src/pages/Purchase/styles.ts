@@ -48,28 +48,28 @@ export const PaymentFormContainer = styled(BaseFormContainer)`
 `
 
 export const FieldsContainer = styled.div`
-  .customerInput {
-    display: flex;
-    justify-content: space-between;
-    flex: 1;
-  }
+	.customerInput {
+		display: flex;
+		justify-content: space-between;
+		flex: 1;
+	}
 
-  .optionalInput {
-    display: flex;
-    flex: 1;
-    position: relative;
-    max-width: 20.5rem;
-  }
+	.optionalInput { 
+		display: flex;
+		flex: 1;
+		position: relative;
+		max-width: 20.5rem;
+	}
 
-  .optionalInput span {
-    position: absolute;
-    top: 30px;
-    right: 20px;
+	.optionalInput span {
+		position: absolute;
+		top: 30px;
+		right: 20px;
 
-    font-style: italic;
-    font-size: 0.875rem;
-    color: ${(props) => props.theme['base-label']};
-  }
+		font-style: italic;
+		font-size: 0.875rem;
+		color: ${(props) => props.theme['base-label']};
+	}
 `
 
 export const BaseInputText = styled.input`
@@ -79,10 +79,102 @@ export const BaseInputText = styled.input`
   color: ${(props) => props.theme['base-text']};
   padding: 0.875rem;
   max-width: ${(props) => props.width};
-  width: 100%;
+	width: 100%;
   margin-top: 1rem;
 
   &::placeholder {
     color: ${(props) => props.theme['base-label']};
+  }
+`
+
+export const OptionsPaymentContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  input { 
+    height: 0;
+    width: 0;
+    background-color: none;
+    box-shadow: none;
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    width: 11rem;
+    padding: 1rem;
+
+    background-color: ${(props) => props.theme['base-button']};
+    color: ${(props) => props.theme['base-text']};
+    font-size: 0.75rem;
+    border-radius: 6px;
+  }
+
+  label:hover {
+    background-color: ${(props) => props.theme['base-hover']};
+    color: ${(props) => props.theme['base-subtitle']};
+    cursor: pointer;
+  }
+
+  label:active {
+    border: 1px solid ${(props) => props.theme.purple};
+  }
+`
+
+export const SelectedCoffeeContainer = styled.div`
+  padding: 2.5rem;
+  background-color: ${(props) => props.theme['base-card']};
+  border-radius: 6px 44px;
+`
+
+export const CardCoffee = styled.div`
+  display: flex;
+  max-width: 23rem;
+  padding-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid ${(props) => props.theme['base-button']};
+  
+  img {
+    max-width: 4rem;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .buttons {
+    display: flex;
+  }
+`
+
+export const ValueContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+
+  strong {
+    font-size: 1.25rem;
+    color: ${(props) => props.theme['base-subtitle']}
+  }
+`
+
+export const ConfirmButton = styled.button`
+  padding: 0.75rem;
+  width: 100%;
+
+  background-color: ${(props) => props.theme.yellow};
+  color: ${(props) => props.theme.white};
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 6px;
+
+  &:hover {
+    background-color: ${(props) => props.theme['yellow-dark']};
+    cursor: pointer;
   }
 `
