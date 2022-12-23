@@ -1,3 +1,5 @@
+import React, { useState } from 'react'
+
 import {
   Bank,
   CreditCard,
@@ -5,6 +7,8 @@ import {
   MapPinLine,
   Money,
   Trash,
+  Minus,
+  Plus,
 } from 'phosphor-react'
 import {
   AddressFormContainer,
@@ -15,6 +19,10 @@ import {
   OptionsPaymentContainer,
   SelectedCoffeeContainer,
   CardCoffee,
+  ButtonsContainer,
+  InputProduct,
+  RemoveProduct,
+  PriceProduct,
   ConfirmButton,
   ValueContainer,
 } from './styles'
@@ -22,6 +30,24 @@ import {
 import coffeeTradicional from '../../assets/coffee/coffeeTradicional.svg'
 
 export function Purchase() {
+  const [quantityCoffee, setQuantityCoffee] = useState(1)
+
+  function handlePlusQuantityCoffee(
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) {
+    event.preventDefault()
+    setQuantityCoffee(quantityCoffee + 1)
+  }
+
+  function handleMinusQuantityCoffee(
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) {
+    event.preventDefault()
+    if (quantityCoffee > 1) {
+      setQuantityCoffee(quantityCoffee - 1)
+    }
+  }
+
   return (
     <PurchaseFormContainer>
       <section>
@@ -95,34 +121,26 @@ export function Purchase() {
             <div className="info">
               <h4>Expresso Tradicional</h4>
 
-              <div className="buttons">
-                <input type="number" />
-                <button>
-                  <Trash />
-                  Remover
-                </button>
-              </div>
+              <ButtonsContainer>
+                <InputProduct>
+                  <button className="icon" onClick={handleMinusQuantityCoffee}>
+                    <Minus />
+                  </button>
+                  <p>{quantityCoffee}</p>
+                  <button className="icon" onClick={handlePlusQuantityCoffee}>
+                    <Plus />
+                  </button>
+                </InputProduct>
+                <RemoveProduct>
+                  <button className="icon">
+                    <Trash />
+                    <p>REMOVER</p>
+                  </button>
+                </RemoveProduct>
+              </ButtonsContainer>
             </div>
 
-            <p>R$ 9,90</p>
-          </CardCoffee>
-
-          <CardCoffee>
-            <img src={coffeeTradicional} alt="" />
-
-            <div className="info">
-              <h4>Expresso Tradicional</h4>
-
-              <div className="buttons">
-                <input type="number" />
-                <button>
-                  <Trash />
-                  Remover
-                </button>
-              </div>
-            </div>
-
-            <p>R$ 9,90</p>
+            <PriceProduct>R$9,90</PriceProduct>
           </CardCoffee>
 
           <ValueContainer>

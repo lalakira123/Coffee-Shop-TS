@@ -47,7 +47,7 @@ export function Home() {
                 <strong>9,90</strong>
               </p>
               <InputProduct>
-                <button className="icon"  onClick={handleMinusQuantityCoffee}>
+                <button className="icon" onClick={handleMinusQuantityCoffee}>
                   <Minus />
                 </button>
                 <p>{quantityCoffee}</p>
