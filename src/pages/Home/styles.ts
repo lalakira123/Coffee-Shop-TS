@@ -83,19 +83,39 @@ export const SelectProductContainer = styled.div`
   }
 `
 
-export const InputProduct = styled.input`
+export const InputProduct = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+
   max-width: 4.5rem;
   height: 2.375rem;
   margin-right: 0.5rem;
-  padding: 0.5rem 0.25rem;
+  padding: 0.75rem 0.5rem;
 
   border: none;
   border-radius: 6px;
 
   background-color: ${(props) => props.theme['base-button']};
 
-  &::placeholder {
-    color: ${(props) => props.theme['base-title']};
+  p {
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    padding: 0 0.25rem;
+  }
+
+  .icon {
+    display: flex;
+    color: ${(props) => props.theme.purple};
+    background-color: ${(props) => props.theme['base-button']};
+    border: none;
+  }
+
+  .icon:hover {
+    cursor: pointer;
+    color: ${(props) => props.theme['purple-dark']};
   }
 `
 

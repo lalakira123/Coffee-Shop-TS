@@ -9,11 +9,24 @@ import {
 } from './styles'
 
 import { IntroduceShop } from './components/IntroduceShop'
-import { ShoppingCart } from 'phosphor-react'
+import { Minus, Plus, ShoppingCart } from 'phosphor-react'
 
 import coffeeTradicional from './../../assets/coffee/coffeeTradicional.svg'
+import { useState } from 'react'
 
 export function Home() {
+  const [quantityCoffee, setQuantityCoffee] = useState(1)
+
+  function handlePlusQuantityCoffee() {
+    setQuantityCoffee(quantityCoffee + 1)
+  }
+
+  function handleMinusQuantityCoffee() {
+    if (quantityCoffee > 1) {
+      setQuantityCoffee(quantityCoffee - 1)
+    }
+  }
+
   return (
     <HomeContainer>
       <IntroduceShop />
@@ -33,169 +46,15 @@ export function Home() {
                 R$
                 <strong>9,90</strong>
               </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
-              <ButtonProduct>
-                <ShoppingCart size={19} />
-              </ButtonProduct>
-            </SelectProductContainer>
-          </ProductContainer>
-
-          <ProductContainer>
-            <img src={coffeeTradicional} alt="" />
-            <TypeCoffee>TRADICIONAL</TypeCoffee>
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <SelectProductContainer>
-              <p>
-                R$
-                <strong>9,90</strong>
-              </p>
-              <InputProduct type="number" min="1" placeholder="1" />
+              <InputProduct>
+                <button className="icon"  onClick={handleMinusQuantityCoffee}>
+                  <Minus />
+                </button>
+                <p>{quantityCoffee}</p>
+                <button className="icon" onClick={handlePlusQuantityCoffee}>
+                  <Plus />
+                </button>
+              </InputProduct>
               <ButtonProduct>
                 <ShoppingCart size={19} />
               </ButtonProduct>
