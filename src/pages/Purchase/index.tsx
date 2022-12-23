@@ -25,12 +25,16 @@ import {
   PriceProduct,
   ConfirmButton,
   ValueContainer,
+  OptionPayment,
 } from './styles'
 
 import coffeeTradicional from '../../assets/coffee/coffeeTradicional.svg'
 
 export function Purchase() {
   const [quantityCoffee, setQuantityCoffee] = useState(1)
+  const [selectPayment, setSelectPayment] = useState<
+    'cash' | 'debit' | 'credit' | ''
+  >('')
 
   function handlePlusQuantityCoffee(
     event: React.MouseEvent<HTMLButtonElement>,
@@ -47,6 +51,21 @@ export function Purchase() {
       setQuantityCoffee(quantityCoffee - 1)
     }
   }
+
+  function handleSelectPayment(
+    event: React.MouseEvent<HTMLButtonElement>,
+    type: 'cash' | 'debit' | 'credit',
+  ) {
+    event.preventDefault()
+
+    if (type !== selectPayment) {
+      setSelectPayment(type)
+    }
+  }
+  console.log(selectPayment)
+  const isCredit = selectPayment === 'credit'
+  const isDebit = selectPayment === 'debit'
+  const isCash = selectPayment === 'cash'
 
   return (
     <PurchaseFormContainer>
@@ -92,21 +111,27 @@ export function Purchase() {
           </div>
 
           <OptionsPaymentContainer>
-            <input type="radio" id="credit" name="typePayment" value="credit" />
-            <label htmlFor="credit">
-              <CreditCard />
+            <OptionPayment
+              onClick={(event) => handleSelectPayment(event, 'credit')}
+              isSelected={isCredit}
+            >
+              <CreditCard className="icon" />
               CARTÃO DE CRÉDITO
-            </label>
-            <input type="radio" id="debit" name="typePayment" value="debit" />
-            <label htmlFor="debit">
-              <Bank />
+            </OptionPayment>
+            <OptionPayment
+              onClick={(event) => handleSelectPayment(event, 'debit')}
+              isSelected={isDebit}
+            >
+              <Bank className="icon" />
               CARTÃO DE DÉBITO
-            </label>
-            <input type="radio" id="cash" name="typePayment" value="cash" />
-            <label htmlFor="cash">
-              <Money />
+            </OptionPayment>
+            <OptionPayment
+              onClick={(event) => handleSelectPayment(event, 'cash')}
+              isSelected={isCash}
+            >
+              <Money className="icon" />
               DINHEIRO
-            </label>
+            </OptionPayment>
           </OptionsPaymentContainer>
         </PaymentFormContainer>
       </section>

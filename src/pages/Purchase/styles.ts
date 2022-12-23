@@ -90,36 +90,37 @@ export const BaseInputText = styled.input`
 export const OptionsPaymentContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`
 
-  input {
-    height: 0;
-    width: 0;
-    background-color: none;
-    box-shadow: none;
-  }
+interface PropsOption {
+  isSelected: boolean
+}
 
-  label {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+export const OptionPayment = styled.button<PropsOption>`
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 
-    width: 11rem;
-    padding: 1rem;
+  width: 11rem;
+  padding: 1rem;
 
-    background-color: ${(props) => props.theme['base-button']};
-    color: ${(props) => props.theme['base-text']};
-    font-size: 0.75rem;
-    border-radius: 6px;
-  }
+  background-color: ${(props) => props.theme['base-button']};
+  color: ${(props) => props.theme['base-text']};
+  font-size: 0.75rem;
+  border-radius: 6px;
+  border: none;
 
-  label:hover {
+  border: 1px solid
+    ${(props) => (props.isSelected ? props.theme.purple : 'none')};
+
+  &:hover {
     background-color: ${(props) => props.theme['base-hover']};
     color: ${(props) => props.theme['base-subtitle']};
     cursor: pointer;
   }
 
-  label:active {
-    border: 1px solid ${(props) => props.theme.purple};
+  .icon {
+    color: ${(props) => props.theme.purple};
   }
 `
 
@@ -200,10 +201,6 @@ export const InputProduct = styled(BaseProductButton)`
 
 export const RemoveProduct = styled(BaseProductButton)`
   max-width: 5.6rem;
-
-  &:hover {
-    ${(props) => props.theme['base-hover']}
-  }
 
   p {
     font-size: 0.75rem;
