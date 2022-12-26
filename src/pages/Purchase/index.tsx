@@ -62,7 +62,7 @@ export function Purchase() {
       setSelectPayment(type)
     }
   }
-  console.log(selectPayment)
+
   const isCredit = selectPayment === 'credit'
   const isDebit = selectPayment === 'debit'
   const isCash = selectPayment === 'cash'

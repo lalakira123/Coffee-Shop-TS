@@ -20,6 +20,11 @@ export const ShowProductsContainer = styled.div`
 
     display: flex;
     flex-wrap: wrap;
+
+    .tagsCoffee {
+      display: flex;
+      gap: 0.25rem;
+    }
   }
 `
 
