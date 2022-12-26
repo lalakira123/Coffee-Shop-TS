@@ -30,11 +30,51 @@ import {
 
 import coffeeTradicional from '../../assets/coffee/coffeeTradicional.svg'
 
+import { FormProvider, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
+
+const purchaseFormValidationSchema = zod.object({
+  cep: zod
+    .string()
+    .min(8, 'Informe o Cep corretamente')
+    .max(8, 'Informe o Cep corretamente'),
+  rua: zod.string(),
+  numero: zod.string(),
+  complemento: zod.string().optional(),
+  bairro: zod.string(),
+  cidade: zod.string(),
+  uf: zod.string().min(2).max(2),
+})
+
+type PurcharseFormData = zod.infer<typeof purchaseFormValidationSchema>
+
 export function Purchase() {
   const [quantityCoffee, setQuantityCoffee] = useState(1)
   const [selectPayment, setSelectPayment] = useState<
     'cash' | 'debit' | 'credit' | ''
   >('')
+
+  const newPurchaseForm = useForm<PurcharseFormData>({
+    resolver: zodResolver(purchaseFormValidationSchema),
+    defaultValues: {
+      cep: '',
+      rua: '',
+      numero: '',
+      complemento: '',
+      bairro: '',
+      cidade: '',
+      uf: '',
+    },
+  })
+
+  const { register, handleSubmit, watch, reset } = newPurchaseForm
+
+  const watchAllFields = watch()
+  const { rua, cidade, numero, bairro, uf, cep } = watchAllFields
+
+  const isDisableSubmit =
+    !rua || !cidade || !numero || !bairro || !uf || !cep || !selectPayment
 
   function handlePlusQuantityCoffee(
     event: React.MouseEvent<HTMLButtonElement>,
@@ -63,12 +103,16 @@ export function Purchase() {
     }
   }
 
+  function handleCreateNewPurchase(data: PurcharseFormData) {
+    reset()
+  }
+
   const isCredit = selectPayment === 'credit'
   const isDebit = selectPayment === 'debit'
   const isCash = selectPayment === 'cash'
 
   return (
-    <PurchaseFormContainer>
+    <PurchaseFormContainer onSubmit={handleSubmit(handleCreateNewPurchase)}>
       <section>
         <h2>Complete seu pedido</h2>
 
@@ -81,22 +125,52 @@ export function Purchase() {
             </div>
           </div>
 
-          <FieldsContainer>
-            <BaseInputText placeholder="CEP" width={'200px'} />
-            <BaseInputText placeholder="Rua" width={'560px'} />
-            <div className="customerInput">
-              <BaseInputText placeholder="Número" width={'200px'} />
-              <div className="optionalInput">
-                <BaseInputText placeholder="Complemento" width={'368px'} />
-                <span>Opcional</span>
+          <FormProvider {...newPurchaseForm}>
+            <FieldsContainer>
+              <BaseInputText
+                placeholder="CEP"
+                width={'200px'}
+                {...register('cep')}
+              />
+              <BaseInputText
+                placeholder="Rua"
+                width={'560px'}
+                {...register('rua')}
+              />
+              <div className="customerInput">
+                <BaseInputText
+                  placeholder="Número"
+                  width={'200px'}
+                  {...register('numero')}
+                />
+                <div className="optionalInput">
+                  <BaseInputText
+                    placeholder="Complemento"
+                    width={'368px'}
+                    {...register('complemento')}
+                  />
+                  <span>Opcional</span>
+                </div>
               </div>
-            </div>
-            <div className="customerInput">
-              <BaseInputText placeholder="Bairro" width={'200px'} />
-              <BaseInputText placeholder="Cidade" width={'276px'} />
-              <BaseInputText placeholder="UF" width={'60px'} />
-            </div>
-          </FieldsContainer>
+              <div className="customerInput">
+                <BaseInputText
+                  placeholder="Bairro"
+                  width={'200px'}
+                  {...register('bairro')}
+                />
+                <BaseInputText
+                  placeholder="Cidade"
+                  width={'276px'}
+                  {...register('cidade')}
+                />
+                <BaseInputText
+                  placeholder="UF"
+                  width={'60px'}
+                  {...register('uf')}
+                />
+              </div>
+            </FieldsContainer>
+          </FormProvider>
         </AddressFormContainer>
 
         <PaymentFormContainer>
@@ -184,7 +258,9 @@ export function Purchase() {
               <strong>R$ 33,20</strong>
             </p>
           </ValueContainer>
-          <ConfirmButton>CONFIRMAR PEDIDO</ConfirmButton>
+          <ConfirmButton type="submit" disabled={isDisableSubmit}>
+            CONFIRMAR PEDIDO
+          </ConfirmButton>
         </SelectedCoffeeContainer>
       </section>
     </PurchaseFormContainer>
