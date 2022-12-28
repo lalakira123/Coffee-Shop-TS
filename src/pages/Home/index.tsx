@@ -1,21 +1,11 @@
-import { useState } from 'react'
-import { Minus, Plus, ShoppingCart } from 'phosphor-react'
-
-import {
-  ButtonProduct,
-  HomeContainer,
-  InputProduct,
-  ProductContainer,
-  SelectProductContainer,
-  ShowProductsContainer,
-  TypeCoffee,
-} from './styles'
+import { HomeContainer, ShowProductsContainer } from './styles'
 
 import { IntroduceShop } from './components/IntroduceShop'
 
 import coffeeTradicional from './../../assets/coffee/coffeeTradicional.svg'
 import coffeeCremoso from './../../assets/coffee/coffeeCremoso.svg'
 import coffeeAmericano from './../../assets/coffee/coffeeAmericano.svg'
+import { CardCoffee } from './components/CardCoffee'
 
 interface TagProps {
   id: number
@@ -62,18 +52,6 @@ export function Home() {
     },
   ]
 
-  const [quantityCoffee, setQuantityCoffee] = useState(1)
-
-  function handlePlusQuantityCoffee() {
-    setQuantityCoffee(quantityCoffee + 1)
-  }
-
-  function handleMinusQuantityCoffee() {
-    if (quantityCoffee > 1) {
-      setQuantityCoffee(quantityCoffee - 1)
-    }
-  }
-
   return (
     <HomeContainer>
       <IntroduceShop />
@@ -84,38 +62,15 @@ export function Home() {
         <div className="products">
           {coffeeList.map((coffee) => {
             return (
-              <ProductContainer key={coffee.id}>
-                <img src={coffee.imgCoffee} alt="" />
-                <div className="tagsCoffee">
-                  {coffee.tags.map((tag) => {
-                    return <TypeCoffee key={tag.id}>{tag.tagName}</TypeCoffee>
-                  })}
-                </div>
-                <h3>{coffee.name}</h3>
-                <p>{coffee.description}</p>
-
-                <SelectProductContainer>
-                  <p>
-                    R$
-                    <strong>{coffee.price}</strong>
-                  </p>
-                  <InputProduct>
-                    <button
-                      className="icon"
-                      onClick={handleMinusQuantityCoffee}
-                    >
-                      <Minus />
-                    </button>
-                    <p>{quantityCoffee}</p>
-                    <button className="icon" onClick={handlePlusQuantityCoffee}>
-                      <Plus />
-                    </button>
-                  </InputProduct>
-                  <ButtonProduct>
-                    <ShoppingCart size={19} />
-                  </ButtonProduct>
-                </SelectProductContainer>
-              </ProductContainer>
+              <CardCoffee
+                key={coffee.id}
+                id={coffee.id}
+                description={coffee.description}
+                price={coffee.price}
+                imgCoffee={coffee.imgCoffee}
+                name={coffee.name}
+                tags={coffee.tags}
+              />
             )
           })}
         </div>
