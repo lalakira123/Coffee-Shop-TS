@@ -32,4 +32,24 @@ export const LocationNavOption = styled(BaseNavOption)`
 export const CartNavOption = styled(BaseNavOption)`
   background-color: ${(props) => props.theme['yellow-light']};
   color: ${(props) => props.theme['yellow-dark']};
+
+  position: relative;
+`
+
+export const FullCart = styled.div`
+  background-color: ${(props) => props.theme['yellow-dark']};
+  color: ${(props) => props.theme.white};
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1000px;
+
+  position: absolute;
+  right: -8px;
+  top: -8px;
 `

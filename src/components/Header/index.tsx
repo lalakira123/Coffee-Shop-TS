@@ -1,6 +1,11 @@
 import { MapPin, ShoppingCart } from 'phosphor-react'
 
-import { CartNavOption, HeaderContainer, LocationNavOption } from './styles'
+import {
+  CartNavOption,
+  HeaderContainer,
+  LocationNavOption,
+  FullCart,
+} from './styles'
 import logoTipo from '../../assets/logoTipo.svg'
 import { NavLink } from 'react-router-dom'
 
@@ -21,6 +26,7 @@ export function Header() {
         <NavLink to="/purchase">
           <CartNavOption href="#">
             <ShoppingCart size={'18px'} />
+            <FullCart>{1}</FullCart>
           </CartNavOption>
         </NavLink>
       </nav>
