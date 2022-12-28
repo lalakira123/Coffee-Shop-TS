@@ -77,7 +77,7 @@ export function CardCoffee({
               name,
               price,
               quantity: quantityCoffee,
-              totalPrice: price * quantityCoffee,
+              totalPrice: Number(Number(price * quantityCoffee).toFixed(2)),
             })
           }
         >
