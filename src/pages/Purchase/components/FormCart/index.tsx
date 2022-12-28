@@ -16,10 +16,12 @@ import {
 import { CartContext } from '../../../../contexts/CartContext'
 import { useFormContext } from 'react-hook-form'
 import { NavLink } from 'react-router-dom'
+import { SelectPaymentContext } from '../../../../contexts/SelectPaymentContext'
 
 export function FormCart() {
   const { cart, minusQuantityCoffee, plusQuantityCoffee, removeItemFromCart } =
     useContext(CartContext)
+  const { selectPayment } = useContext(SelectPaymentContext)
   const [totalItem, setTotalItem] = useState(0)
 
   useEffect(() => {
@@ -34,7 +36,8 @@ export function FormCart() {
   const watchAllFields = watch()
   const { rua, cidade, numero, bairro, uf, cep } = watchAllFields
 
-  const isDisableSubmit = !rua || !cidade || !numero || !bairro || !uf || !cep
+  const isDisableSubmit =
+    !rua || !cidade || !numero || !bairro || !uf || !cep || !selectPayment
 
   const deliveryTax = 3.5
 

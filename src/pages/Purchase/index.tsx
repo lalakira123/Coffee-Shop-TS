@@ -12,6 +12,7 @@ import * as zod from 'zod'
 import { useContext } from 'react'
 import { PurchaseContext } from '../../contexts/PurchaseContext'
 import { CartContext } from '../../contexts/CartContext'
+import { SelectPaymentContext } from '../../contexts/SelectPaymentContext'
 
 const purchaseFormValidationSchema = zod.object({
   cep: zod
@@ -31,6 +32,7 @@ type PurcharseFormData = zod.infer<typeof purchaseFormValidationSchema>
 export function Purchase() {
   const { makePurchase } = useContext(PurchaseContext)
   const { cart } = useContext(CartContext)
+  const { selectPayment } = useContext(SelectPaymentContext)
 
   const navigate = useNavigate()
 
@@ -50,7 +52,7 @@ export function Purchase() {
   const { handleSubmit, reset } = newPurchaseForm
 
   function handleCreateNewPurchase(data: PurcharseFormData) {
-    makePurchase(data, cart, 'credit')
+    makePurchase(data, cart, selectPayment)
     reset()
     navigate('/purchase-made')
   }

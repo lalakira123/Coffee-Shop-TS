@@ -1,6 +1,6 @@
-import { MouseEvent, useState } from 'react'
-
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
+import { useContext } from 'react'
+import { SelectPaymentContext } from '../../../../contexts/SelectPaymentContext'
 import {
   PaymentFormContainer,
   OptionsPaymentContainer,
@@ -8,20 +8,8 @@ import {
 } from './styles'
 
 export function FormPayment() {
-  const [selectPayment, setSelectPayment] = useState<
-    'cash' | 'debit' | 'credit' | ''
-  >('')
-
-  function handleSelectPayment(
-    event: MouseEvent<HTMLButtonElement>,
-    type: 'cash' | 'debit' | 'credit',
-  ) {
-    event.preventDefault()
-
-    if (type !== selectPayment) {
-      setSelectPayment(type)
-    }
-  }
+  const { selectPayment, changeSelectPayment } =
+    useContext(SelectPaymentContext)
 
   const isCredit = selectPayment === 'credit'
   const isDebit = selectPayment === 'debit'
@@ -41,21 +29,21 @@ export function FormPayment() {
 
       <OptionsPaymentContainer>
         <OptionPayment
-          onClick={(event) => handleSelectPayment(event, 'credit')}
+          onClick={(event) => changeSelectPayment(event, 'credit')}
           isSelected={isCredit}
         >
           <CreditCard className="icon" />
           CARTÃO DE CRÉDITO
         </OptionPayment>
         <OptionPayment
-          onClick={(event) => handleSelectPayment(event, 'debit')}
+          onClick={(event) => changeSelectPayment(event, 'debit')}
           isSelected={isDebit}
         >
           <Bank className="icon" />
           CARTÃO DE DÉBITO
         </OptionPayment>
         <OptionPayment
-          onClick={(event) => handleSelectPayment(event, 'cash')}
+          onClick={(event) => changeSelectPayment(event, 'cash')}
           isSelected={isCash}
         >
           <Money className="icon" />

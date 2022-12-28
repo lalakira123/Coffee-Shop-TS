@@ -6,6 +6,7 @@ import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/defaultTheme'
 import { Router } from './Router'
 import { PurchaseContextProvider } from './contexts/PurchaseContext'
+import { SelectPaymentContextProvider } from './contexts/SelectPaymentContext'
 
 export function App() {
   return (
@@ -13,7 +14,9 @@ export function App() {
       <BrowserRouter>
         <PurchaseContextProvider>
           <CartContextProvider>
-            <Router />
+            <SelectPaymentContextProvider>
+              <Router />
+            </SelectPaymentContextProvider>
           </CartContextProvider>
         </PurchaseContextProvider>
       </BrowserRouter>
