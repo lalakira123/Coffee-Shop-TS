@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import {
   BoxInfoDeliveryContainer,
@@ -9,8 +11,11 @@ import {
 } from './styles'
 
 import delivery from './../../assets/delivery.svg'
+import { PurchaseContext } from '../../contexts/PurchaseContext'
 
 export function PurchaseMade() {
+  const { purchase } = useContext(PurchaseContext)
+
   return (
     <PurchaseMadeContainer>
       <div>
@@ -24,9 +29,15 @@ export function PurchaseMade() {
             </TagLocation>
             <div>
               <p>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>
+                  {purchase.address.rua}, {purchase.address.numero}
+                </strong>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>
+                {purchase.address.bairro} - {purchase.address.cidade},{' '}
+                {purchase.address.uf}
+              </p>
             </div>
           </TagContainer>
 
@@ -49,7 +60,11 @@ export function PurchaseMade() {
             <div>
               <p>Pagamento na entrega</p>
               <p>
-                <strong>Cartão de Crédito</strong>
+                <strong>
+                  {purchase.typePayment === 'credit' ? 'Cartão de Crédito' : ''}
+                  {purchase.typePayment === 'debit' ? 'Cartão de Débito' : ''}
+                  {purchase.typePayment === 'cash' ? 'Dinheiro' : ''}
+                </strong>
               </p>
             </div>
           </TagContainer>

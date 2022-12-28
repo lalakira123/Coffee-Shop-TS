@@ -1,6 +1,6 @@
 import React, { createContext, ReactNode, useState } from 'react'
 
-interface CartItemProps {
+export interface CartItemProps {
   id: number
   imgCoffee: string
   name: string

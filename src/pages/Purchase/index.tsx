@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { PurchaseFormContainer } from './styles'
 
 import { FormPayment } from './components/FormPayment'
@@ -7,6 +9,9 @@ import { FormCart } from './components/FormCart'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
+import { useContext } from 'react'
+import { PurchaseContext } from '../../contexts/PurchaseContext'
+import { CartContext } from '../../contexts/CartContext'
 
 const purchaseFormValidationSchema = zod.object({
   cep: zod
@@ -24,6 +29,11 @@ const purchaseFormValidationSchema = zod.object({
 type PurcharseFormData = zod.infer<typeof purchaseFormValidationSchema>
 
 export function Purchase() {
+  const { makePurchase } = useContext(PurchaseContext)
+  const { cart } = useContext(CartContext)
+
+  const navigate = useNavigate()
+
   const newPurchaseForm = useForm<PurcharseFormData>({
     resolver: zodResolver(purchaseFormValidationSchema),
     defaultValues: {
@@ -40,7 +50,9 @@ export function Purchase() {
   const { handleSubmit, reset } = newPurchaseForm
 
   function handleCreateNewPurchase(data: PurcharseFormData) {
+    makePurchase(data, cart, 'credit')
     reset()
+    navigate('/purchase-made')
   }
 
   return (
