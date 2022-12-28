@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-import {
-  Bank,
-  CreditCard,
-  CurrencyDollar,
-  MapPinLine,
-  Money,
-  Trash,
-  Minus,
-  Plus,
-} from 'phosphor-react'
+import { MapPinLine, Trash, Minus, Plus } from 'phosphor-react'
 import {
   AddressFormContainer,
   PurchaseFormContainer,
-  PaymentFormContainer,
   BaseInputText,
   FieldsContainer,
-  OptionsPaymentContainer,
   SelectedCoffeeContainer,
   CardCoffee,
   ButtonsContainer,
@@ -25,8 +14,9 @@ import {
   PriceProduct,
   ConfirmButton,
   ValueContainer,
-  OptionPayment,
 } from './styles'
+
+import { FormPayment } from './components/FormPayment'
 
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -87,9 +77,7 @@ export function Purchase() {
       totalPrice: 12.9,
     },
   ])
-  const [selectPayment, setSelectPayment] = useState<
-    'cash' | 'debit' | 'credit' | ''
-  >('')
+
   const [totalItem, setTotalItem] = useState(0)
 
   useEffect(() => {
@@ -99,7 +87,7 @@ export function Purchase() {
 
     setTotalItem(Number(totalValue))
   }, [cart])
-  console.log(cart)
+
   const newPurchaseForm = useForm<PurcharseFormData>({
     resolver: zodResolver(purchaseFormValidationSchema),
     defaultValues: {
@@ -178,24 +166,9 @@ export function Purchase() {
     setCart(newCart)
   }
 
-  function handleSelectPayment(
-    event: React.MouseEvent<HTMLButtonElement>,
-    type: 'cash' | 'debit' | 'credit',
-  ) {
-    event.preventDefault()
-
-    if (type !== selectPayment) {
-      setSelectPayment(type)
-    }
-  }
-
   function handleCreateNewPurchase(data: PurcharseFormData) {
     reset()
   }
-
-  const isCredit = selectPayment === 'credit'
-  const isDebit = selectPayment === 'debit'
-  const isCash = selectPayment === 'cash'
 
   const deliveryTax = 3.5
 
@@ -261,41 +234,7 @@ export function Purchase() {
           </FormProvider>
         </AddressFormContainer>
 
-        <PaymentFormContainer>
-          <div className="headerForm">
-            <CurrencyDollar />
-            <div>
-              <h3>Pagamento</h3>
-              <p>
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
-              </p>
-            </div>
-          </div>
-
-          <OptionsPaymentContainer>
-            <OptionPayment
-              onClick={(event) => handleSelectPayment(event, 'credit')}
-              isSelected={isCredit}
-            >
-              <CreditCard className="icon" />
-              CARTÃO DE CRÉDITO
-            </OptionPayment>
-            <OptionPayment
-              onClick={(event) => handleSelectPayment(event, 'debit')}
-              isSelected={isDebit}
-            >
-              <Bank className="icon" />
-              CARTÃO DE DÉBITO
-            </OptionPayment>
-            <OptionPayment
-              onClick={(event) => handleSelectPayment(event, 'cash')}
-              isSelected={isCash}
-            >
-              <Money className="icon" />
-              DINHEIRO
-            </OptionPayment>
-          </OptionsPaymentContainer>
-        </PaymentFormContainer>
+        <FormPayment />
       </section>
 
       <section>
