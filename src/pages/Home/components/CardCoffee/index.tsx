@@ -5,8 +5,9 @@ import {
   SelectProductContainer,
   TypeCoffee,
 } from './styles'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Minus, Plus, ShoppingCart } from 'phosphor-react'
+import { CartContext } from '../../../../contexts/CartContext'
 
 interface TagProps {
   id: number
@@ -30,6 +31,8 @@ export function CardCoffee({
   price,
   tags,
 }: CardCoffeeProps) {
+  const { addItemToCart } = useContext(CartContext)
+
   const [quantityCoffee, setQuantityCoffee] = useState(1)
 
   function handlePlusQuantityCoffee() {
@@ -66,7 +69,18 @@ export function CardCoffee({
             <Plus />
           </button>
         </InputProduct>
-        <ButtonProduct>
+        <ButtonProduct
+          onClick={(event) =>
+            addItemToCart(event, {
+              id,
+              imgCoffee,
+              name,
+              price,
+              quantity: quantityCoffee,
+              totalPrice: price * quantityCoffee,
+            })
+          }
+        >
           <ShoppingCart size={19} />
         </ButtonProduct>
       </SelectProductContainer>

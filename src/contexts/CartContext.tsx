@@ -25,6 +25,10 @@ interface CartContextType {
     quantity: number,
     id: number,
   ) => void
+  addItemToCart: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    item: CartItemProps,
+  ) => void
 }
 
 export const CartContext = createContext({} as CartContextType)
@@ -34,6 +38,21 @@ interface CartContextProviderProps {
 }
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cart, setCart] = useState<CartItemProps[]>([])
+
+  function addItemToCart(
+    event: React.MouseEvent<HTMLButtonElement>,
+    item: CartItemProps,
+  ) {
+    event.preventDefault()
+
+    const alreadyHasAtCart = cart.find((coffee) => {
+      return coffee.id === item.id
+    })
+
+    if (!alreadyHasAtCart) {
+      setCart([...cart, item])
+    }
+  }
 
   function plusQuantityCoffee(
     event: React.MouseEvent<HTMLButtonElement>,
@@ -99,6 +118,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         removeItemFromCart,
         minusQuantityCoffee,
         plusQuantityCoffee,
+        addItemToCart,
       }}
     >
       {children}
