@@ -1,4 +1,12 @@
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { createContext, ReactNode, useReducer } from 'react'
+
+import {
+  addItemToCartAction,
+  minusQuantityCoffeeAction,
+  plusQuantityCoffeeAction,
+  removeItemFromCartAction,
+} from '../reducers/cart/actions'
+import { cartReducer } from '../reducers/cart/reducer'
 
 export interface CartItemProps {
   id: number
@@ -37,7 +45,9 @@ interface CartContextProviderProps {
   children: ReactNode
 }
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cart, setCart] = useState<CartItemProps[]>([])
+  const [cartState, dispatch] = useReducer(cartReducer, { cart: [] })
+
+  const { cart } = cartState
 
   function addItemToCart(
     event: React.MouseEvent<HTMLButtonElement>,
@@ -45,13 +55,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   ) {
     event.preventDefault()
 
-    const alreadyHasAtCart = cart.find((coffee) => {
-      return coffee.id === item.id
-    })
-
-    if (!alreadyHasAtCart) {
-      setCart([...cart, item])
-    }
+    dispatch(addItemToCartAction(item))
   }
 
   function plusQuantityCoffee(
@@ -61,19 +65,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   ) {
     event.preventDefault()
 
-    const newCart = cart.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          quantity: quantity + 1,
-          totalPrice: Number(((quantity + 1) * item.price).toFixed(2)),
-        }
-      }
-
-      return item
-    })
-
-    setCart(newCart)
+    dispatch(plusQuantityCoffeeAction(quantity, id))
   }
 
   function minusQuantityCoffee(
@@ -83,19 +75,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   ) {
     event.preventDefault()
 
-    const newCart = cart.map((item) => {
-      if (item.id === id && quantity > 1) {
-        return {
-          ...item,
-          quantity: quantity - 1,
-          totalPrice: Number(((quantity - 1) * item.price).toFixed(2)),
-        }
-      }
-
-      return item
-    })
-
-    setCart(newCart)
+    dispatch(minusQuantityCoffeeAction(quantity, id))
   }
 
   function removeItemFromCart(
@@ -104,11 +84,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   ) {
     event.preventDefault()
 
-    const newCart = cart.filter((item) => {
-      return item.id !== id
-    })
-
-    setCart(newCart)
+    dispatch(removeItemFromCartAction(id))
   }
 
   return (
